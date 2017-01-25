@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
      	display: flex;
      	justify-content: center;
-     	align-items: center;
+     	align-items: flex-start;
       text-align: center;
      }
      </style>
