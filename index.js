@@ -1,5 +1,8 @@
 const CONFIG = require('./config.json')
 
+const APP_NAME = process.env.npm_package_name||require('./package.json').name,
+      APP_VERSION = process.env.npm_package_version||require('./package.json').version
+
 const fs = require('fs')
 const path = require('path')
 
@@ -66,7 +69,10 @@ app.get('/', (req, res) => {
 app.use(express.static( path.join(__dirname, 'www') ))
 
 app.listen(3463, _ => {
-  console.log('find-flaki server started...')
+  console.log('[%s] Server started. (v%s)',
+    APP_NAME,
+    APP_VERSION
+  )
 })
 
 
