@@ -112,7 +112,7 @@ function locate() {
     }).then(c => {
       fs.writeFileSync(path.join(__dirname,'data/last-checkin.json'), JSON.stringify(c, null, 1))
 
-      c.locationHTML = `Flaki was ${c.tsDiff} in ${c.checkin.venue.location.city}, at <a href="${c.checkinUrl}">${c.checkin.venue.name}</a>.`
+      c.locationHTML = `Flaki was ${c.tsDiff} in ${c.checkin.venue.location.city}, at <a target="_blank" href="${c.checkinUrl}">${c.checkin.venue.name}</a>.`
       console.log(c.locationHTML)
 
       return c
