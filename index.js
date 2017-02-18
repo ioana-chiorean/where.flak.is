@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   locate().then( locate => res.send(
   `<html>
     <head>
-     <title>Where is Flaki?</title>
+     <title>{{venue}} — Where is Flaki?</title>
      <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;subset=latin-ext" rel="stylesheet">
      <style>
      body {
@@ -54,15 +54,23 @@ app.get('/', (req, res) => {
       text-align: center;
      }
      </style>
+
+     <meta name="twitter:card" content="summary" />
+     <meta name="twitter:site" content="@slsoftworks" />
+     <meta property="og:title" content="{{venue}} — Where is Flaki?" />
+     <meta property="twitter:description" content="{{loc}}" />
+     <meta property="og:image" content="{{locpic}}" />
     </head>
     <body>
       <main>
-        <p>{{loc}}</p>
+        <p>{{lochtml}}</p>
       </main>
     </body>
    </html>`
-  .replace('{{loc}}', locate.locationHTML)
-  .replace('{{locpic}}', locate.photos[Math.random()*6|0])
+  .replace('{{venue}}', locate.checkin.venue.name)
+  .replace('{{loc}}', locate.location)
+  .replace('{{lochtml}}', locate.locationHTML)
+  .replace(/{{locpic}}/g, locate.photos[Math.random()*6|0])
   ))
 })
 
@@ -112,6 +120,7 @@ function locate() {
     }).then(c => {
       fs.writeFileSync(path.join(__dirname,'data/last-checkin.json'), JSON.stringify(c, null, 1))
 
+      c.location = `Flaki was ${c.tsDiff} in ${c.checkin.venue.location.city}, at ${c.checkin.venue.name}.`
       c.locationHTML = `Flaki was ${c.tsDiff} in ${c.checkin.venue.location.city}, at <a target="_blank" href="${c.checkinUrl}">${c.checkin.venue.name}</a>.`
       console.log(c.locationHTML)
 
