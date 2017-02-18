@@ -15,7 +15,8 @@ const app = express()
 
 app.get('/', (req, res) => {
   locate().then( locate => res.send(
-  `<html>
+  `<!doctype html>
+<html>
     <head>
      <title>{{venue}} — Where is Flaki?</title>
      <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;subset=latin-ext" rel="stylesheet">
