@@ -59,8 +59,9 @@ app.get('/', (req, res) => {
      <meta name="twitter:card" content="summary" />
      <meta name="twitter:site" content="@slsoftworks" />
      <meta property="og:title" content="{{venue}} — Where is Flaki?" />
-     <meta property="twitter:description" content="{{loc}}" />
+     <meta property="og:description" content="{{loc}}" />
      <meta property="og:image" content="{{locpic}}" />
+     <meta property="og:url" content="{{curl}}" />
     </head>
     <body>
       <main>
@@ -68,10 +69,11 @@ app.get('/', (req, res) => {
       </main>
     </body>
    </html>`
-  .replace('{{venue}}', locate.checkin.venue.name)
-  .replace('{{loc}}', locate.location)
-  .replace('{{lochtml}}', locate.locationHTML)
+  .replace(/{{venue}}/g, locate.checkin.venue.name)
+  .replace(/{{loc}}/g, locate.location)
+  .replace(/{{lochtml}}/g, locate.locationHTML)
   .replace(/{{locpic}}/g, locate.photos[Math.random()*6|0])
+  .replace(/{{curl}}/g, 'http://where.flak.is/?'+Date.now()) //TODO: fix https & add current host
   ))
 })
 
