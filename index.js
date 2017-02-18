@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
   .replace(/{{loc}}/g, locate.location)
   .replace(/{{lochtml}}/g, locate.locationHTML)
   .replace(/{{locpic}}/g, locate.photos[Math.random()*6|0])
-  .replace(/{{curl}}/g, 'http://where.flak.is/?'+Date.now()) //TODO: fix https & add current host
+  .replace(/{{curl}}/g, 'http://where.flak.is/?'+(Date.now()/1000/60).toFixed(0)) //TODO: fix https & add current host
   ))
 })
 
