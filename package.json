@@ -1,6 +1,6 @@
 {
-  "name": "find-flaki",
-  "version": "0.1.1",
+  "name": "where-flak-is",
+  "version": "0.1.2",
   "description": "Where is Flaki?",
   "main": "index.js",
   "scripts": {
