@@ -21,10 +21,13 @@ app.get('/', (req, res) => {
      <title>{{venue}} — Where is Flaki?</title>
      <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;subset=latin-ext" rel="stylesheet">
      <style>
+     html, body {
+       width: 100%; height: 100%;
+     }
+
      body {
      	font-family: 'Amatic SC', cursive;
      	margin: 0;
-     	width: 100%; height: 100%;
      	display: flex;
      }
 
