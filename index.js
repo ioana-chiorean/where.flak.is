@@ -14,13 +14,13 @@ const photos = require('./lib/photos')
 const app = express()
 
 const TIMESTAMP = (Date.now()/1000/60).toFixed(0)
-const CANONICAL_URL = 'http://where.flak.is/?' // TODO: current host
+const CANONICAL_URL = 'http://where.flak.is/?'+TIMESTAMP // TODO: current host
 
 app.get('/', (req, res) => {
   const requestTimestamp = Object.keys(req.query)[0]||0
 
   if (!requestTimestamp) {
-    return res.redirect(303, CANONICAL_URL+TIMESTAMP)
+    return res.redirect(303, CANONICAL_URL)
   }
 
   locate().then( locate => res.send(
