@@ -13,7 +13,16 @@ const photos = require('./lib/photos')
 
 const app = express()
 
+const TIMESTAMP = (Date.now()/1000/60).toFixed(0)
+const CANONICAL_URL = 'http://where.flak.is/?' // TODO: current host
+
 app.get('/', (req, res) => {
+  const requestTimestamp = Object.keys(req.query)[0]||0
+
+  if (!requestTimestamp) {
+    return res.redirect(303, CANONICAL_URL+TIMESTAMP)
+  }
+
   locate().then( locate => res.send(
   `<!doctype html>
 <html>
@@ -76,7 +85,7 @@ app.get('/', (req, res) => {
   .replace(/{{loc}}/g, locate.location)
   .replace(/{{lochtml}}/g, locate.locationHTML)
   .replace(/{{locpic}}/g, locate.photos[Math.random()*6|0])
-  .replace(/{{curl}}/g, 'http://where.flak.is/?'+(Date.now()/1000/60).toFixed(0)) //TODO: fix https & add current host
+  .replace(/{{curl}}/g, CANONICAL_URL) //TODO: fix https & add current host
   ))
 })
 
